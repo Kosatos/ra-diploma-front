@@ -1,55 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Counter from './components/Counter/Counter';
-import { useAppDispatch, useAppSelector } from './redux/hooks';
-import { counterActions } from './redux/counter/slice';
+import { Routes, Route } from 'react-router-dom';
+
+import Layout from './layouts/Layout';
+import HomePage from './pages/HomePage';
+import CatalogPage from './pages/CatalogPage';
+import AboutPage from './pages/AboutPage';
+import ContactsPage from './pages/ContactsPage';
 
 function App(): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  const { value } = useAppSelector((state) => state.counter);
-
-  const increment = (): void => {
-    dispatch(counterActions.increment());
-  };
-
-  const decrement = (): void => {
-    dispatch(counterActions.decrement());
-  };
-
-  const incrementAsync = (): void => {
-    dispatch(counterActions.incrementAsync());
-  };
-
-  const decrementAsync = (): void => {
-    dispatch(counterActions.decrementAsync());
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter
-          onIncrement={increment}
-          onDecrement={decrement}
-          onIncrementAsync={incrementAsync}
-          onDecrementAsync={decrementAsync}
-          value={value}
-        />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contacts" element={<ContactsPage />} />
+      </Route>
+    </Routes>
   );
 }
 
