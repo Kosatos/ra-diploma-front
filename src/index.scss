@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic-ext');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=cyrillic-ext');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   font-family: 'Roboto', sans-serif;
 }
@@ -189,6 +193,11 @@ section {
   margin-bottom: 1em;
 }
 
+.img-fluid {
+  height: 648px;
+  object-fit: contain;
+}
+
 .catalog-item-size {
   display: inline-block;
   padding: 0 10px;
@@ -295,8 +304,17 @@ section {
 }
 
 /* Bootstrap */
-.nav-link.active {
-  color: #ff0000;
+.nav-link {
+  color: rgba(0, 0, 0, 0.55);
+  transition: color 0.4s ease;
+
+  &.active {
+    color: #ff0000;
+  }
+
+  &:hover {
+    color: #000;
+  }
 }
 
 h2,

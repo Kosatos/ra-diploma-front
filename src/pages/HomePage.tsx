@@ -1,28 +1,14 @@
-import React from 'react';
+import React from 'react'
+import Hits from '../components/Hits'
+import Catalog from '../components/Catalog'
 
 const HomePage: React.FC = (): JSX.Element => {
   return (
     <>
-      <section className="top-sales">
-        <h2 className="text-center">Хиты продаж!</h2>
-        <div className="preloader">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </section>
-      <section className="catalog">
-        <h2 className="text-center">Каталог</h2>
-        <div className="preloader">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </section>
+      <Hits />
+      <Catalog />
     </>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

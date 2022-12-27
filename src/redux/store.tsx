@@ -1,27 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
-import rootReducer from './rootReducer';
-import rootSaga from './rootSaga';
+import { configureStore } from '@reduxjs/toolkit'
+import { serverApi } from './server/server.api'
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const configureAppStore = (initialState = {}) => {
-  const reduxSagaMonitorOptions = {};
-  const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
+export const store = configureStore({
+  reducer: {
+    [serverApi.reducerPath]: serverApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(serverApi.middleware),
+  devTools: process.env.NODE_ENV !== 'production',
+})
 
-  const middleware = [sagaMiddleware];
-
-  const store = configureStore({
-    reducer: rootReducer,
-    middleware: (gDM) => gDM().concat([...middleware]),
-    preloadedState: initialState,
-    devTools: process.env.NODE_ENV !== 'production',
-  });
-
-  sagaMiddleware.run(rootSaga);
-  return store;
-};
-
-export const store = configureAppStore();
-
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
