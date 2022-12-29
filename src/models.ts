@@ -12,6 +12,6 @@ export interface ICategoryItem {
 }
 
 export interface ICategory {
-  id?: number
+  id: number
   title: string
 }

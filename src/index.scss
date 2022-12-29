@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic-ext');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=cyrillic-ext');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
   font-family: 'Roboto', sans-serif;
 }
@@ -331,4 +327,19 @@ h2,
 .btn-outline-primary:hover {
   background-color: #727e86;
   border-color: #727e86;
+}
+
+.error-message {
+  background-color: rgba(200, 200, 200, 0.2);
+  font-size: 22px;
+  color: #727e86;
+  text-align: center;
+  padding: 60px 0;
+  margin-bottom: 50px;
+  border-radius: 10px;
+
+  img {
+    width: 200px;
+    height: 200px;
+  }
 }

@@ -1,12 +1,23 @@
-import React from 'react'
-import { useGetDataQuery } from '../../redux/server/server.api'
+import React, { useEffect } from 'react'
+import { useLazyGetItemsQuery } from '../../redux/server/server.api'
 import Loader from '../Loader'
 import Error from '../Error'
 import Card from '../Card'
 import CategoriesList from './CategoriesList'
+import { useAppSelector } from '../../redux/hooks'
 
 const Catalog: React.FC = (): JSX.Element => {
-  const { isError, isLoading, data } = useGetDataQuery('items')
+  const [fetchItems, { isLoading, isError, data }] = useLazyGetItemsQuery()
+  const { id } = useAppSelector((state) => state.active_category)
+
+  useEffect(() => {
+    if (id === 11) {
+      void fetchItems('')
+    } else {
+      void fetchItems(id)
+    }
+  }, [id])
+
   return (
     <>
       <section className='catalog'>

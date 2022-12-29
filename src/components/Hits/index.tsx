@@ -3,10 +3,10 @@ import Card from '../Card'
 import Loader from '../Loader'
 import Error from '../Error'
 
-import { useGetDataQuery } from '../../redux/server/server.api'
+import { useGetHitsQuery } from '../../redux/server/server.api'
 
 const Hits: React.FC = (): JSX.Element => {
-  const { isLoading, isError, data } = useGetDataQuery('top-sales')
+  const { isLoading, isError, data } = useGetHitsQuery('')
 
   return (
     <section className='top-sales'>

@@ -7,13 +7,22 @@ export const serverApi = createApi({
     baseUrl: 'http://localhost:7070/api/',
   }),
   endpoints: (build) => ({
-    getData: build.query<ICategoryItem[], string>({
-      query: (path: string) => path,
+    getHits: build.query<ICategoryItem[], any>({
+      query: () => 'top-sales',
     }),
     getCategories: build.query<ICategory[], any>({
       query: () => 'categories',
     }),
+    getItems: build.query<ICategoryItem[], number | string>({
+      query: (id: number | string) => ({
+        url: 'http://localhost:7070/api/items',
+        params: {
+          categoryId: id,
+        },
+      }),
+    }),
   }),
 })
 
-export const { useGetDataQuery, useGetCategoriesQuery } = serverApi
+export const { useGetHitsQuery, useGetCategoriesQuery, useLazyGetItemsQuery } =
+  serverApi
