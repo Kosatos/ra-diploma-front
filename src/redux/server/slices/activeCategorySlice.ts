@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface ActiveCategory {
+interface ActiveCategoryState {
   id: number
 }
-const initialState: ActiveCategory = { id: 11 }
+const initialState: ActiveCategoryState = { id: 11 }
 
 export const activeCategorySlice = createSlice({
   name: 'active category',

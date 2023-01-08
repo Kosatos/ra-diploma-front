@@ -3,7 +3,7 @@ import { useGetCategoriesQuery } from '../../../redux/server/server.api'
 import CategoryItem from './CategoryItem'
 
 const CategoriesList: React.FC = (): JSX.Element => {
-  const { data } = useGetCategoriesQuery('')
+  const { data } = useGetCategoriesQuery()
   return (
     <ul className='catalog-categories nav justify-content-center'>
       <CategoryItem category={{ id: 11, title: 'Все' }} />

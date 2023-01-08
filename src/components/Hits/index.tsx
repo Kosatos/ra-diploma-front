@@ -6,7 +6,7 @@ import Error from '../Error'
 import { useGetHitsQuery } from '../../redux/server/server.api'
 
 const Hits: React.FC = (): JSX.Element => {
-  const { isLoading, isError, data } = useGetHitsQuery('')
+  const { isLoading, isError, data } = useGetHitsQuery()
 
   return (
     <section className='top-sales'>
