@@ -13,7 +13,32 @@ export const serverApi = createApi({
     getCategories: build.query<ICategory[], void>({
       query: () => 'categories',
     }),
-    getItems: build.query<
+    // getItems: build.query<
+    //   ICategoryItem[],
+    //   { id: string | number; offset: string | number; q: string }
+    // >({
+    //   query: ({ id, offset, q }) => ({
+    //     url: '/items',
+    //     params: {
+    //       categoryId: id,
+    //       offset,
+    //       q,
+    //     },
+    //   }),
+    // }),
+    getItemsByCategory: build.query<
+      ICategoryItem[],
+      { id: string | number; q: string }
+    >({
+      query: ({ id, q }) => ({
+        url: '/items',
+        params: {
+          categoryId: id,
+          q,
+        },
+      }),
+    }),
+    getItemsByOffset: build.query<
       ICategoryItem[],
       { id: string | number; offset: string | number; q: string }
     >({
@@ -29,5 +54,13 @@ export const serverApi = createApi({
   }),
 })
 
-export const { useGetHitsQuery, useGetCategoriesQuery, useLazyGetItemsQuery } =
-  serverApi
+// export const { useGetHitsQuery, useGetCategoriesQuery, getItemsByCategory } =
+//   serverApi
+export const {
+  useGetHitsQuery,
+  useGetCategoriesQuery,
+  useLazyGetItemsByCategoryQuery,
+  useLazyGetItemsByOffsetQuery,
+} = serverApi
+
+export const { updateQueryData } = serverApi.util
