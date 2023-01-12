@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import {
-  updateQueryData,
-  useLazyGetItemsByCategoryQuery,
-  useLazyGetItemsByOffsetQuery,
-} from '../../redux/server/server.api'
+// import {
+//   useLazyGetItemsQuery,
+//   useLazyGetMoreItemsQuery,
+//   updateQueryData,
+// } from '../../redux/server/server.api'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 
 import Loader from '../Loader'
@@ -12,68 +12,38 @@ import Card from '../Card'
 import CategoriesList from './CategoriesList'
 import LoadMoreBtn from '../LoadMoreBtn'
 import { submitValue } from '../../redux/server/slices/searchSlice'
+import {
+  addItemsRequest,
+  getItemsRequest,
+} from '../../redux/server/slices/productsSlice'
 
 const Catalog: React.FC = (): JSX.Element => {
-  const [fetchItemsByCategory, { isLoading, isError, data }] =
-    useLazyGetItemsByCategoryQuery()
-  const [
-    fetchItemsByOffset,
-    { isLoading: isLoadingOffset, isError: isErrorOffset, data: dataByOffset },
-  ] = useLazyGetItemsByOffsetQuery()
   const { id } = useAppSelector((state) => state.active_category)
-  const dispatch = useAppDispatch()
   const { value, isSubmit } = useAppSelector((state) => state.search)
+  const {
+    items: data,
+    isLoading,
+    isError,
+    isLoadingMore,
+    isErrorMore,
+    allLoaded,
+  } = useAppSelector((state) => state.products)
+  const dispatch = useAppDispatch()
   const [offset, setOffset] = useState(6)
 
   const handleFetchItems = (more = false): void => {
-    if (id === 11) {
-      if (more) {
-        void fetchItemsByOffset({ id: '', offset, q: value }).then(() => {
-          if (dataByOffset !== undefined) {
-            dispatch(
-              updateQueryData(
-                'getItemsByCategory',
-                { id: '', q: value },
-                (draftItems) => {
-                  console.log(dataByOffset)
-                  draftItems.push(...dataByOffset)
-                }
-              )
-            )
-          }
-        })
-
-        setOffset((prev) => (prev += 6))
-      } else {
-        void fetchItemsByCategory({ id: '', q: value })
-        setOffset(6)
-      }
+    if (more) {
+      dispatch(addItemsRequest({ id, offset, q: value }))
+      setOffset((prev) => (prev += 6))
     } else {
-      if (more) {
-        void fetchItemsByOffset({ id, offset, q: value }).then(() => {
-          if (dataByOffset !== undefined) {
-            dispatch(
-              updateQueryData(
-                'getItemsByCategory',
-                { id, q: value },
-                (draftItems) => {
-                  draftItems.push(...dataByOffset)
-                }
-              )
-            )
-          }
-        })
-
-        setOffset((prev) => (prev += 6))
-      } else {
-        void fetchItemsByCategory({ id, q: value })
-        setOffset(6)
-      }
+      dispatch(getItemsRequest({ id, q: value }))
+      setOffset(6)
     }
   }
 
   const loadMore = (): void => {
     handleFetchItems(true)
+    console.log(isErrorMore)
   }
 
   useEffect(() => {
@@ -87,17 +57,21 @@ const Catalog: React.FC = (): JSX.Element => {
         <h2 className='text-center'>Каталог</h2>
         <CategoriesList />
         <div className='row'>
-          {(isError || isErrorOffset) && <Error />}
-          {(isLoading || isLoadingOffset) && <Loader />}
-          {data?.map((item) => (
-            <div key={item.id} className='col-4'>
-              <Card card={item} extraClass='catalog-item-card' />
-            </div>
-          ))}
+          {isError && <Error />}
+          {isLoading && <Loader />}
+          {!isLoading &&
+            !isError &&
+            data.map((item) => (
+              <div key={item.id} className='col-4'>
+                <Card card={item} extraClass='catalog-item-card' />
+              </div>
+            ))}
         </div>
 
         <div className='text-center'>
-          {(dataByOffset === undefined || dataByOffset?.length === 6) && (
+          {isErrorMore && <Error />}
+          {isLoadingMore && <Loader />}
+          {!allLoaded && !isLoadingMore && !isErrorMore && (
             <LoadMoreBtn handleLoadMore={loadMore} />
           )}
         </div>
