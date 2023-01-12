@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import {
-//   useLazyGetItemsQuery,
-//   useLazyGetMoreItemsQuery,
-//   updateQueryData,
-// } from '../../redux/server/server.api'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 
 import Loader from '../Loader'
