@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ICategoryItem, IQuery } from '../../../models'
+import { ICategoryItem, IQuery } from '../../models'
 
 interface ProductsState {
   items: ICategoryItem[]

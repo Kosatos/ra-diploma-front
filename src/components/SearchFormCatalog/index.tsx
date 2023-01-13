@@ -1,9 +1,6 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import {
-  changeSearch,
-  submitValue,
-} from '../../redux/server/slices/searchSlice'
+import { changeSearch, submitValue } from '../../redux/slices/searchSlice'
 
 const SearchFormCatalog: React.FC = (): JSX.Element => {
   const { value } = useAppSelector((state) => state.search)

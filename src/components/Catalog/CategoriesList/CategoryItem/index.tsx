@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ICategory } from '../../../../models'
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
-import { toggleActive } from '../../../../redux/server/slices/activeCategorySlice'
+import { toggleActive } from '../../../../redux/slices/activeCategorySlice'
 
 interface CategoryItemProps {
   category: ICategory

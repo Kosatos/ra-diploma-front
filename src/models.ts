@@ -21,3 +21,25 @@ export interface IQuery {
   offset?: number
   q: string
 }
+
+export interface ISize {
+  size: string
+  avalible: boolean
+}
+
+export interface IProductInfo {
+  id: number
+  category: number
+  title: string
+  images: string[]
+  sku: string
+  manufacturer: string
+  color: string
+  material: string
+  reason: string
+  season: string
+  heelSize: string
+  price: number
+  oldPrice: number
+  sizes: ISize[]
+}

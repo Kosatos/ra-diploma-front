@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ICategory, ICategoryItem } from '../../models'
+import { ICategory, ICategoryItem, IProductInfo } from '../../models'
 
 export const serverApi = createApi({
   reducerPath: 'server/api',
@@ -13,9 +13,14 @@ export const serverApi = createApi({
     getCategories: build.query<ICategory[], void>({
       query: () => 'categories',
     }),
+    getItemInfo: build.query<IProductInfo, number>({
+      query: (id) => `items/${id}`,
+    }),
   }),
 })
 
-export const { useGetHitsQuery, useGetCategoriesQuery } = serverApi
-
-export const { updateQueryData } = serverApi.util
+export const {
+  useGetHitsQuery,
+  useGetCategoriesQuery,
+  useLazyGetItemInfoQuery,
+} = serverApi

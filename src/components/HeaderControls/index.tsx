@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { openSearch, submitValue } from '../../redux/server/slices/searchSlice'
+import { openSearch, submitValue } from '../../redux/slices/searchSlice'
 
 const HeaderControls: React.FC = (): JSX.Element => {
   const { value, isOpen } = useAppSelector((state) => state.search)

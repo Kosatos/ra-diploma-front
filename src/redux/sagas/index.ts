@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { put, spawn, call } from 'redux-saga/effects'
-import { ICategoryItem, IQuery } from '../../../models'
-import { fetchAPI } from '../../../utils/fetchAPI'
+import { ICategoryItem, IQuery } from '../../models'
+import { fetchAPI } from '../../utils/fetchAPI'
 import {
   addItemsFailure,
   addItemsRequest,

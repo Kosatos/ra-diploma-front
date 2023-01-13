@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { serverApi } from './server/server.api'
 import createSagaMiddleware from '@redux-saga/core'
-import productsReducer from './server/slices/productsSlice'
-import activeCategoryReducer from './server/slices/activeCategorySlice'
-import searchReducer from './server/slices/searchSlice'
-import saga from './server/sagas'
+import productsReducer from './slices/productsSlice'
+import activeCategoryReducer from './slices/activeCategorySlice'
+import searchReducer from './slices/searchSlice'
+import cartReducer from './slices/cartSlice'
+import saga from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -14,6 +15,7 @@ export const store = configureStore({
     products: productsReducer,
     active_category: activeCategoryReducer,
     search: searchReducer,
+    cart: cartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(serverApi.middleware, sagaMiddleware),

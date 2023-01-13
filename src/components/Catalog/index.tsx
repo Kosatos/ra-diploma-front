@@ -6,11 +6,11 @@ import Error from '../Error'
 import Card from '../Card'
 import CategoriesList from './CategoriesList'
 import LoadMoreBtn from '../LoadMoreBtn'
-import { submitValue } from '../../redux/server/slices/searchSlice'
+import { submitValue } from '../../redux/slices/searchSlice'
 import {
   addItemsRequest,
   getItemsRequest,
-} from '../../redux/server/slices/productsSlice'
+} from '../../redux/slices/productsSlice'
 
 const Catalog: React.FC = (): JSX.Element => {
   const { id } = useAppSelector((state) => state.active_category)
