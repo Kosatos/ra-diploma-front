@@ -197,6 +197,7 @@ section {
 .catalog-item-size {
   display: inline-block;
   padding: 0 10px;
+  cursor: pointer;
 }
 
 .catalog-item-size.selected {
@@ -329,17 +330,27 @@ h2,
   border-color: #727e86;
 }
 
-.error-message {
-  background-color: rgba(200, 200, 200, 0.2);
+.message {
   font-size: 22px;
-  color: #727e86;
   text-align: center;
   padding: 60px 0;
   margin-bottom: 50px;
   border-radius: 10px;
 
+  &_error {
+    color: #727e86;
+    background-color: rgba(200, 200, 200, 0.2);
+  }
+
+  &_success {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(127, 255, 0, 0.5);
+  }
+
   img {
     width: 200px;
     height: 200px;
+    object-fit: cover;
   }
 }

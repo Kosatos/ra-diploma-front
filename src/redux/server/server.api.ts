@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ICategory, ICategoryItem, IProductInfo } from '../../models'
+import { ICategory, ICategoryItem, IProductInfo, IOrder } from '../../models'
 
 export const serverApi = createApi({
   reducerPath: 'server/api',
@@ -16,6 +16,13 @@ export const serverApi = createApi({
     getItemInfo: build.query<IProductInfo, number>({
       query: (id) => `items/${id}`,
     }),
+    sendOrder: build.mutation<IOrder, IOrder>({
+      query: (order) => ({
+        url: '/order',
+        method: 'POST',
+        body: order,
+      }),
+    }),
   }),
 })
 
@@ -23,4 +30,5 @@ export const {
   useGetHitsQuery,
   useGetCategoriesQuery,
   useLazyGetItemInfoQuery,
+  useSendOrderMutation,
 } = serverApi

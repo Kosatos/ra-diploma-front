@@ -8,6 +8,7 @@ import ProductPage from './pages/ProductPage'
 import AboutPage from './pages/AboutPage'
 import ContactsPage from './pages/ContactsPage'
 import NotFoundPage from './pages/NotFoundPage'
+import CartPage from './pages/CartPage'
 
 function App(): JSX.Element {
   return (
@@ -19,6 +20,7 @@ function App(): JSX.Element {
         <Route path='/about' element={<AboutPage />} />
         <Route path='/contacts' element={<ContactsPage />} />
         <Route path='*' element={<NotFoundPage />} />
+        <Route path='/cart' element={<CartPage />} />
       </Route>
     </Routes>
   )

@@ -43,3 +43,24 @@ export interface IProductInfo {
   oldPrice: number
   sizes: ISize[]
 }
+
+export interface ICartItem {
+  id: number
+  title: string
+  size: string | null
+  count: number
+  price: number
+  total?: number
+}
+
+export interface IOrder {
+  owner: {
+    phone: string
+    address: string
+  }
+  items: {
+    id: number
+    price: number
+    count: number
+  }[]
+}

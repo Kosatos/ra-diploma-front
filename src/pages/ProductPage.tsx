@@ -43,6 +43,7 @@ const ProductPage: React.FC = (): JSX.Element => {
                 season={data.season}
               />
               <ProductActions
+                id={data?.id}
                 title={data?.title}
                 price={data?.price}
                 sizes={data?.sizes}

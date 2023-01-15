@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ISize } from '../../models'
+import { ICartItem, ISize } from '../../models'
 
 import SizesToggler from '../SizesToggler'
 import QuantityCounter from '../QuantityCounter'
@@ -8,27 +8,23 @@ import { useNavigate } from 'react-router-dom'
 import { addToCart } from '../../redux/slices/cartSlice'
 
 interface ProductActionsProps {
+  id: number
   title: string
   sizes: ISize[]
   price: number
 }
 
-interface ICartInput {
-  title: string
-  activeSize: string | null
-  quantity: number
-  price: number
-}
-
 const ProductActions: React.FC<ProductActionsProps> = ({
+  id,
   title,
   sizes,
   price,
 }): JSX.Element => {
-  const [cartInput, setCartData] = useState<ICartInput>({
+  const [cartInput, setCartData] = useState<ICartItem>({
+    id,
     title,
-    activeSize: null,
-    quantity: 1,
+    size: null,
+    count: 1,
     price,
   })
   const dispatch = useDispatch()
@@ -36,12 +32,12 @@ const ProductActions: React.FC<ProductActionsProps> = ({
 
   const availableSizes = sizes.filter((s: ISize) => s.avalible)
   const setProductQuantity = (value: number): void => {
-    setCartData((prev) => ({ ...prev, quantity: value }))
+    setCartData((prev) => ({ ...prev, count: value }))
   }
   const setActiveSize = (value: string): void => {
-    setCartData((prev) => ({ ...prev, activeSize: value }))
+    setCartData((prev) => ({ ...prev, size: value }))
   }
-  const putIntoCart = (): void => {
+  const handleAddToCart = (): void => {
     dispatch(addToCart(cartInput))
     navigate('/cart')
   }
@@ -54,15 +50,15 @@ const ProductActions: React.FC<ProductActionsProps> = ({
           <div className='text-center'>
             <SizesToggler
               availableSizes={availableSizes}
-              activeSize={cartInput.activeSize}
+              activeSize={cartInput.size}
               handleToggle={setActiveSize}
             />
             <QuantityCounter handleClick={setProductQuantity} />
           </div>
           <button
             className='btn btn-danger btn-block btn-lg'
-            onClick={putIntoCart}
-            disabled={cartInput.activeSize === null}
+            onClick={handleAddToCart}
+            disabled={cartInput.size === null}
           >
             В корзину
           </button>
